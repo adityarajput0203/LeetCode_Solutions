@@ -1,2 +1,2 @@
-# LeetCode_Solutions
+# Interview_DS_Algo
 LeetCode Solutions 
