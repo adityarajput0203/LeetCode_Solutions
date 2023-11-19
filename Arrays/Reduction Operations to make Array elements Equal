@@ -1,0 +1,51 @@
+# ============== leetcode 1887 Java Code =============
+
+# Time complexity : O(nlogn) Due to sorting
+# Space comlexity : O(1)
+class Solution {
+    public int reductionOperations(int[] nums) {
+
+        Arrays.sort(nums);       
+        int n = nums.length;
+
+        for(int i=0;i<n/2;i++){
+
+            int temp = nums[i];
+            nums[i] = nums[n-1-i];
+            nums[n-1-i]=temp;
+        }
+
+        int steps =0;
+        for(int i=1;i<n;i++){
+            if(nums[i]!=nums[i-1]){
+                steps +=i;
+            }
+        }
+        return steps;
+       
+        
+    }
+}
+
+
+
+# Time Complexity: O(n), where n is the length of the input array nums. The algorithm iterates through the array once.
+# Space Complexity: O(1), as the extra space used is constant (the freq array has a fixed size).
+
+class Solution {
+    public int reductionOperations(int[] nums) {
+        int n = nums.length;
+        int[] freq = new int[50001];
+        for (int i = 0; i < n; i++) {
+            freq[nums[i]]++;
+        }
+        int res = 0, operations = 0;
+        for (int i = 50000; i >= 1; i--) {
+            if (freq[i] > 0) {
+                operations += freq[i];
+                res += operations - freq[i];
+            }
+        }
+        return res;
+    }
+}
