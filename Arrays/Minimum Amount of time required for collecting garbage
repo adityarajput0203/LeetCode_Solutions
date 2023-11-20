@@ -1,0 +1,55 @@
+# ================ Java Code ==============
+# Time complexity is O(10n) i.e. O(n) garbage length does not exceed 10
+# Space compelxity is O(1) 
+
+class Solution {
+    public int garbageCollection(String[] garbage, int[] travel) {
+
+        int n= garbage.length;
+
+        int total =0;
+
+        //initialised each truck at 0th index
+        int M_trk=0;
+        int P_trk=0;
+        int G_trk=0;
+
+        //check the each garbage in each house with this make sure you add each garbage 
+        //collection time with total and mark the index which has the highest number 
+        //with specific garbage for ex. 'G' is at the 3rd index so truck will go to that house 
+        // here we have taken a total outside the loop so that whatever the garbage will be the
+        // truck will take 1min to pick up it so we are nothing but calcualation total garbage.
+
+        for(int i=0;i<n;i++){
+            for(int j=0;j<garbage[i].length();j++){
+
+                if(garbage[i].charAt(j)=='M'){
+                    M_trk=i;
+                }
+                else if(garbage[i].charAt(j)=='G'){
+                    G_trk=i;
+                }
+                else{
+                    P_trk=i;
+                }
+                total++;
+            }
+        }
+
+            //Here we have taken a prefix sum so that no need to add total time 
+            // if the truck goes to 3rd house then it will take travel[3-1] time.
+           for(int i=1;i<travel.length;i++){
+                travel[i]+=travel[i-1];
+
+            }
+
+            //here we are calculating the total time taken by truck to travel to the houses.
+            //Before this we have calculated total garbage and their pickup time.
+            total += M_trk>0?travel[M_trk-1]:0;
+            total += G_trk>0?travel[G_trk-1]:0;
+            total += P_trk>0?travel[P_trk-1]:0;
+
+            return total;
+        
+    }
+}
