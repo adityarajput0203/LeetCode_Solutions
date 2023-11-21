@@ -1,0 +1,42 @@
+//java Code using HashMap
+// In these type of questions like (i)+(j) == (i)+(j) try to bring the i on one side and j on one side 
+// Time Complexity: O(n)  here we have ignored the complexity to reverse the number which is equql to the Log10(num) 
+// Space Complexity: O(n)
+
+class Solution {
+
+    public int rev(int num){
+
+        int rev = 0;
+        while (num>0){
+
+            rev = rev*10 + num%10;
+            num/=10;
+        }
+
+        return rev;
+    }
+    public int countNicePairs(int[] nums) {
+
+        int n= nums.length;
+        int mod = 1000000007;
+
+        Map<Integer,Integer> mp= new HashMap<>();
+
+        for(int i=0;i<n;i++){
+            nums[i] = nums[i] - rev(nums[i]);
+        }
+
+        
+        int res= 0;
+        for(int i=0;i<n;i++){
+            res = (int)((res + mp.getOrDefault(nums[i],0)) % mod);     // here we have taken the 1st element from map and mod of it and added it to the res;
+
+            mp.put(nums[i], mp.getOrDefault(nums[i],0) + 1);          //here we have added element to the map and added its frequecy as well.
+
+        }
+        
+        return res;
+    }
+}
+
