@@ -1,0 +1,19 @@
+class Solution {
+    public boolean arrayStringsAreEqual(String[] word1, String[] word2) {
+
+        String res1 = String.join("", word1);
+        String res2 = String.join("", word2);
+
+        if(res1.equals(res2)){
+            return true;
+        }
+
+        return false;
+
+
+        
+    }
+}
+
+// Time Complexity : O(m+n) 
+// Space Complexity: O(m+n) where m and n is the total length of word1 and word2
